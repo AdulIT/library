@@ -1,23 +1,25 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="jumbotron">
-    <h1 class="display-4">Welcome on my site!</h1>
-    <p class="lead">Create account and login to review, rent and rate books!</p>
+    <h1 class="display-4">Добро пожаловать на сайт AUI Library</h1>
+    <p class="lead">
+        Создайте учетную запись и войдите в систему, чтобы просматривать, арендовать и оценивать книги!
+    </p>
     <hr class="my-4">
     <p>
-        <h5>Search book</h5>
+        <h5>Поиск книг</h5>
         <form class="searchForm" action="{% url 'search' %}" method=" GET">
             <div class="form-group row">
-                <input class="form-control col-md-7" required="required" name="q" type="text" placeholder="Write title or author">
+                <input class="form-control col-md-7" required="required" name="q" type="text" placeholder="Название или автор">
                 <span class="col-md-1"></span>
-                <button type="submit" class="btn btn-primary form-control col-md-2">Search</button>
+                <button type="submit" class="btn btn-primary form-control col-md-2">Поиск</button>
             </div>
         </form>
 
     </p>
 </div>
 <hr class="my-4">
-<h2>Recenlty added books:</h2>
+<h2>Последние поступления:</h2>
 <div class="row lastBooksContainer">
     {% for book in book_list %}
     <div class="col-md-4 bookCard">
@@ -30,10 +32,10 @@
             <span class="fa fa-star checked"></span>
             {% endfor %} <br>
             {% else %}
-            <h6>Nobody rated</h6>
+            <h6>Нет рейтинга</h6>
             {% endif %}
 
-            <a href="{% url 'bookDetail' book.id %}"><button class="btn btn-primary btn-xs">Book detail</button></a>
+            <a href="{% url 'bookDetail' book.id %}"><button class="btn btn-primary btn-xs">Детали книги</button></a>
         </div>
     </div>
     {% endfor %}
