@@ -1,17 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
 <p>
-    <h5>Поиск книг</h5>
+    <h5>Search book</h5>
     <form class="searchForm" action="{% url 'search' %}" method=" GET">
         <div class="form-group row">
-            <input class="form-control col-md-7" required="required" name="q" type="text" placeholder="Название или автор">
+            <input class="form-control col-md-7" required="required" name="q" type="text" placeholder="Write title or author">
             <span class="col-md-1"></span>
-            <button type="submit" class="btn btn-primary form-control col-md-2">Поиск</button>
+            <button type="submit" class="btn btn-primary form-control col-md-2">Search</button>
         </div>
     </form>
 </p>
 <hr class="my-4">
-<h3>Лучшие книги:</h3>
+<h3>Best rated books:</h3>
 <div class="row lastBooksContainer">
     {% for book in top_3_books %}
     <div class="col-md-4 bookCard">
@@ -24,14 +24,14 @@
             <span class="fa fa-star checked"></span>
             {% endfor %} <br>
             {% else %}
-            <h6>Нет рейтинга</h6>
+            <h6>Nobody rated</h6>
             {% endif %}
-            <a href="{% url 'bookDetail' book.id %}"><button class="btn btn-primary btn-xs">Детали книги</button></a>
+            <a href="{% url 'bookDetail' book.id %}"><button class="btn btn-primary btn-xs">Book details</button></a>
         </div>
     </div>
     {% endfor %}
 </div>
-<h3>Наиболее оцененные книги:</h3>
+<h3>Most review books:</h3>
 <div class="row lastBooksContainer">
     {% for book in most_reviews %}
     <div class="col-md-4 bookCard">
@@ -44,14 +44,14 @@
             <span class="fa fa-star checked"></span>
             {% endfor %} <br>
             {% else %}
-            <h6>Без оценки</h6>
+            <h6>Nobody rated</h6>
             {% endif %}
-            <a href="{% url 'bookDetail' book.id %}"><button class="btn btn-primary btn-xs">Детали книги</button></a>
+            <a href="{% url 'bookDetail' book.id %}"><button class="btn btn-primary btn-xs">Book details</button></a>
         </div>
     </div>
     {% endfor %}
 </div>
-<h3>Самые обсуждаемые книги:</h3>
+<h3>Most comment books:</h3>
 <div class="row lastBooksContainer">
     {% for book in most_comments %}
     <div class="col-md-4 bookCard">
@@ -64,29 +64,33 @@
             <span class="fa fa-star checked"></span>
             {% endfor %} <br>
             {% else %}
-            <h6>Без оценки</h6>
+            <h6>Nobody rated</h6>
             {% endif %}
-            <a href="{% url 'bookDetail' book.id %}"><button class="btn btn-primary btn-xs">Детали книги</button></a>
+            <a href="{% url 'bookDetail' book.id %}"><button class="btn btn-primary btn-xs">Book details</button></a>
         </div>
     </div>
     {% endfor %}
 </div>
-<h3>Последние поступления:</h3>
+<h3>Recent added books:</h3>
 <div class="row lastBooksContainer">
     {% for book in book_list %}
     <div class="col-md-4 bookCard">
         <div class="cardBorder">
-            <img class="book_image" src="{{ book.image.url }}" alt="Book image">
-            <h5>{{ book.title }}</h5>
-            <h6>{{ book.author }}</h6>
-            {% if book.actual_rating %}
-            {% for rate in book.actual_rating %}
-            <span class="fa fa-star checked"></span>
-            {% endfor %} <br>
-            {% else %}
-            <h6>Без оценки</h6>
-            {% endif %}
-            <a href="{% url 'bookDetail' book.id %}"><button class="btn btn-primary btn-xs">Детали книги</button></a>
+            <div class="img">
+                <img class="book_image" src="{{ book.image.url }}" alt="Book image">
+            </div>
+            <div class="text">
+                <h5>{{ book.title }}</h5>
+                <h6>{{ book.author }}</h6>
+                {% if book.actual_rating %}
+                {% for rate in book.actual_rating %}
+                <span class="fa fa-star checked"></span>
+                {% endfor %} <br>
+                {% else %}
+                <h6>Nobody rated</h6>
+                {% endif %}
+                <a href="{% url 'bookDetail' book.id %}"><button class="btn btn-primary btn-xs">Book details</button></a>
+            </div>
         </div>
     </div>
     {% endfor %}

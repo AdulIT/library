@@ -1,42 +1,39 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="jumbotron">
-    <h1 class="display-4">Добро пожаловать на сайт AUI Library</h1>
-    <p class="lead">
-        Создайте учетную запись и войдите в систему, чтобы просматривать, арендовать и оценивать книги!
-    </p>
-    <hr class="my-4">
-    <p>
-        <h5>Поиск книг</h5>
+    <div>
+        <h5>Search book</h5>
         <form class="searchForm" action="{% url 'search' %}" method=" GET">
             <div class="form-group row">
-                <input class="form-control col-md-7" required="required" name="q" type="text" placeholder="Название или автор">
+                <input class="form-control col-md-7" required="required" name="q" type="text" placeholder="Write title or author">
                 <span class="col-md-1"></span>
-                <button type="submit" class="btn btn-primary form-control col-md-2">Поиск</button>
+                <button type="submit" class="btn btn-primary form-control col-md-2">Search</button>
             </div>
         </form>
 
-    </p>
+    </div>
 </div>
-<hr class="my-4">
-<h2>Последние поступления:</h2>
-<div class="row lastBooksContainer">
+
+<h2>Recenlty added books:</h2>
+<div class="lastBooksContainer">
     {% for book in book_list %}
     <div class="col-md-4 bookCard">
-        <div class="cardBorder">
-            <img class="book_image" src="{{ book.image.url }}" alt="Book image">
-            <h5>{{ book.title }}</h5>
-            <h6>{{ book.author }}</h6>
-            {% if book.actual_rating %}
-            {% for rate in book.actual_rating %}
-            <span class="fa fa-star checked"></span>
-            {% endfor %} <br>
-            {% else %}
-            <h6>Нет рейтинга</h6>
-            {% endif %}
-
-            <a href="{% url 'bookDetail' book.id %}"><button class="btn btn-primary btn-xs">Детали книги</button></a>
-        </div>
+        <a href="{% url 'bookDetail' book.id %}">
+            <div class="cardBorder">
+                <img class="book_image" src="{{ book.image.url }}" alt="Book image">
+                <div class="text">
+                    <h3>{{ book.title }}</h3>
+                    <h5>{{ book.author }}</h5>
+                    {% if book.actual_rating %}
+                    {% for rate in book.actual_rating %}
+                    <span class="fa fa-star checked"></span>
+                    {% endfor %} <br>
+                    {% else %}
+                    <h5>Nobody rated</h5>
+                    {% endif %}
+                </div>
+            </div>
+        </a>
     </div>
     {% endfor %}
 </div>

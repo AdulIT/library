@@ -1,38 +1,41 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="row">
-    <div class="col-md-3">
+    <div class="user-con">
 
-        <div class="username">
-            <img style="margin-bottom:15px;" src="{{ user.profile.image.url }}" alt="User Photo">
-            <h4>
-                <strong>{{ user.username }}</strong>
-            </h4>
-            <a href="{% url 'UserUpdate' %}"><button class="btn btn-success profile_buttons">Edit my profile
-                    <i class="fas fa-user-edit"></i></button></a>
-            <a href="{% url 'ProfileUpdate' %}"><button class="btn btn-success profile_buttons">Edit your photo
-                    <i class="fas fa-camera-retro"></i></button></a>
-
+        <div class="username dflex">
+            <div style="width: 240px;">
+                <img style="width: 100%; border-radius:100%;height: 240px;" src="{{ user.profile.image.url }}" alt="User Photo">
+                <a href="{% url 'ProfileUpdate' %}"><button class="btn btn-success profile_buttons">Edit your photo</button></a>
+            </div>
+            <div class="dflex dflex-col">
+                <h4>
+                    {{ user.username }}
+                </h4>
+                <div class="dflex">
+                    <div class="profile_info">
+                        <p>Email: {{ user.email }}</p>
+                        <p>Join date: {{ user.date_joined|date:"F j, Y" }}</p>
+                        <p>Last login date: {{ user.last_login|date:"F j, Y" }}</p>
+                    </div>
+                </div>
+                <a href="{% url 'UserUpdate' %}"><button class="btn btn-success profile_buttons">Edit my profile</button></a>
+                
+            </div>
         </div>
-        <div class="profile_info">
-
-            <p><strong>Join date</strong> <br>{{ user.date_joined|date:"F j, Y" }}</p>
-            <p><strong>Last login date </strong><br>{{ user.last_login|date:"F j, Y" }}</p>
-            <p><strong>Email </strong><br>{{ user.email }}</p>
-        </div>
-
     </div>
 
-    <div class="col-md-9">
+    <div class="user-table">
         <h2>Your rented books:</h2>
         <table style="width:100%" id="books">
-            <tr>
-                <th>Title</th>
-                <th>Rent date</th>
-                <th>Data of return</th>
-                <th>Days</th>
-                <th>Action</th>
-            </tr>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Rent date</th>
+                    <th>Data of return</th>
+                    <th>Days</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
             {% for book in user.books.all %}
             <tr>
                 <td>{{ book.book.title }}</td>

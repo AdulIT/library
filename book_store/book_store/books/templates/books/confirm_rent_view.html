@@ -1,10 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
-
-<h3>Вы уверены что хотите аредовать эту книгу ? </h3>
-<img src="{{ book.image.url }}" class="bookImage" alt="">
-<h5><strong>Название:</strong> {{ book.title }}</h5>
-<h5><strong>Автор:</strong> {{ book.author }}</h5>
-<a href="{% url 'rent_book' book.id %}"><button class="btn btn-success btn-xs">Арендовать</button></a>
-<a href="{% url 'bookDetail' book.id %}"><button class="btn btn-info btn-xs">Вернуться</button></a>
+<div class="login-center">
+    <div class="bg">
+        <h3>Are you sure tha you want to rent this book? </h3>
+        <img src="{{ book.image.url }}" class="bookImage" alt="">
+        <h5><strong>Title:</strong> {{ book.title }}</h5>
+        <h5><strong>Author:</strong> {{ book.author }}</h5>
+        <a href="{% url 'rent_book' book.id %}"><button class="btn btn-success btn-xs">Rent book</button></a>
+        <a href="{% url 'bookDetail' book.id %}"><button class="btn btn-info btn-xs">Return</button></a>
+    </div>
+</div>
 {% endblock content %}

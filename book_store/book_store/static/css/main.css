@@ -1,154 +1,356 @@
-* {
-    padding: 0;
+*{
     margin: 0;
-    border: none;
+    padding: 0;
     box-sizing: border-box;
-    font-family: 'Ubuntu', sans-serif;
 }
 
 body {
     background: #f5f7fa;
-    /* color: #333333; */
-    margin-top: 5rem;
-    padding-bottom: 50px;
+    color: #333333;
+    font-family: Ubuntu,Helvetica,Arial,sans-serif;
 }
 
-a:hover {
-    color: #1F2538;
+.container{
+    width: 100%;
+    padding-right: 0.75rem;
+    padding-right: var(--bs-gutter-x,.75rem);
+    padding-left: 0.75rem;
+    padding-left: var(--bs-gutter-x,.75rem);
+    margin-right: auto;
+    margin-left: auto;
 }
 
-.PageContent {
-    margin-top: 100px;
+.fixed{
+    position: fixed;
+    right: 0;
+    left: 0;
+    z-index: 1030;
 }
-.formsWidth {
-    max-width: 500px;
+
+.dflex{
+    display: flex;
 }
-.bg-steel {
-    /* background-color: #235789; */
-    background-color: hsla(0,0%,100%,.8);
+
+/* header */
+.navbar{
+    top: 0;
+    background-color:#ffffffcc;
     backdrop-filter: blur(16px);
-}
-.navbar-nav {
-    font-size: 0.9em;
-}
-.navbar-brand {
-    font-weight: bold;
-}
-.navbar-brand.navbar-title {
-    color: #1F2538;
-}
-.navbar-nav > a > img {
-    height: 1.3em;
+    border-bottom: 1px solid #f0f4fc;
 }
 
-.site-header .navbar-nav .nav-link {
-    color: #1F2538;
-    font-weight: 400;
-    font-size: 18px;
+.navbar-brand{
+    margin-right: 1rem;
 }
-.navbar-dark .navbar-nav .nav-link:focus, .navbar-dark .navbar-nav .nav-link:hover {
-    color: #1F2538;
-    text-decoration: underline;
+
+.navbar .container{
+    display: flex;
+    flex-wrap: inherit;
+    align-items: center;
+    justify-content: space-between;
+    width: 1240px;
+    height: 68px;
 }
-.navbar-dark .navbar-brand:focus, .navbar-dark .navbar-brand:hover {
-    color: #1F2538;
-    text-decoration: underline;
+
+.aiu-logo{
+    max-width: 115px;
 }
-.site-header .navbar-nav .nav-link.active {
-    font-weight: 500;
+
+.navbarNav{
+    display: flex;
+    flex-basis: auto;
 }
-.btn.btn-primary {
-    background-color: #5c50e3;
-    border-color: #5c50e3;
-    font-weight: normal;
-    padding: 0.1rem 0.4rem;
-    margin-top: 3px;
+
+.navbar-nav{
+    display: flex;
+    flex-direction: row;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
 }
-.btn-primary:not(:disabled):not(.disabled).active:focus, .btn-primary:not(:disabled):not(.disabled):active:focus, .show>.btn-primary.dropdown-toggle:focus {
-    box-shadow: none;
+
+.navbar-nav a{
+    text-decoration: none;
+    padding: 1.4rem 1rem;
+    color:#3b4258;
+    transition: 0.2s;    
 }
-.btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
-    background-color: #5c50e3;
-    border-color: #5c50e3;
+
+.navbar-nav a:hover{
+    color:rgb(92, 80, 227);
 }
-.content-section {
-    padding: 20px;
-    border-radius: 8px;
-    background-color: #e9ecef;
-}
-.pageContent {
+
+/* END header */
+
+
+/* main */
+.main{
     margin-top: 100px;
 }
-.searchForm {
-    margin-left: 10px;
-    margin-right: 10px;
+
+.main .container{
+    width: 1240px;
 }
-.lastBooksContainer {
-    margin: 0 auto;
-}
-.book_image {
-    max-width: 150px;
-    max-height: 150px;
-}
-.bookCard {
-    padding: 10px 10px;
-    text-align: center;
-}
-.cardBorder {
-    min-height: 340px;
-    padding-top: 15px;
-    border-radius: 8px;
-    background-color: #e9ecef;
-}
-.navUserImage {
-    height: 40px;
-    border-radius: 50%;
-    width: 40px;
-}
-.jumbotron {
-    border-radius: 12px;
-}
-.bookDetailLeftSide {
-    text-align: center;
-}
-.comment_text {
-    font-style: italic;
-    margin-left: 20px;
-}
-.bookDetailLeftSide .bookImage {
-    max-width: 200px;
-}
-.bookImage {
-    max-height: 300px;
-}
-/* PROFILE SITE STYLE */
-.profile_buttons {
+
+.lastBooksContainer{
+    display: flex;
+    flex-wrap: wrap;
     margin-top: 10px;
 }
-#books {
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
+
+.bookCard{
+    max-width: 16%;
+}
+
+.bookCard .cardBorder{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    background: #ffff;
+    width: 100%;
+    height: 350px;
+    overflow: hidden;
+}
+
+.bookCard a{
+    text-decoration: none;
+    color: #1f2538;
+}
+
+.cardBorder img{
+    width: 100%;
+    height: 100%;
+}
+
+.cardBorder .text{
+    padding: 1rem
+}
+
+.cardBorder .text h3,h5{
+    margin: 5px 0;
+}
+
+.cardBorder h3{
+    font-size: 20px;
+    font-weight: 700;
+    color: #1f2538;
+}
+
+.card-btn{
+    border:none;
+    background-color: #5c50e3;
+    padding: 10px 20px;
+    color:#ffffffcc;
+    border-radius:10px;
+}
+/* END main */
+
+
+/* login/regis */
+.login-center{
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.login-center .bg{
+    background-color:#ffffffcc;
+    padding: 40px;
+    border-radius:10px;
+    min-height: 200px;
+    width: 360px;
+    margin-bottom: 20px;
+}
+
+.login-center .bg span{
+    display: none;
+}
+
+.bg a{
+    text-decoration: none;
+    color: #3b4258;
+}
+
+.bg a:hover{
+    color:rgb(92, 80, 227);
+}
+
+.bg button{
+    padding: 8px;
+    background-color: #ffff;
+    border: 1px solid #5c50e3;
+    color: #5c50e3;
+    border-radius: 4px;
+    transition: 0.3s;
+}
+
+.bg button:hover{
+    background-color: #5c50e3;
+    color: #ffff;
+}
+
+.formsWidth{
+    margin-top: 10px;
+}
+
+.formsWidth input, label, button{
+    margin: 8px 0;
     width: 100%;
 }
 
-#books td,
-#books th {
-    border: 1px solid #ddd;
+.formsWidth input {
+    padding: 8px;
+    background-color: #f5f7fa;
+    border: 1px solid #b3b3b3cc;
+    border-radius: 4px;
+}
+
+.formsWidth small{
+    margin: 5px 0 ;
+}
+
+.formsWidth button{
+    padding: 8px;
+    background-color: #5c50e3;
+    border: 1px solid #5c50e3;
+    color: #ffff;
+    border-radius: 4px;
+    transition: 0.3s;
+}
+/* END login/regis */
+
+/* user_detail */
+.username{
+    align-items:center;
+}
+
+.dflex-col{
+    flex-direction: column;
+    margin-left: 80px;
+}
+
+.username h4{
+    font-size: 2.25rem;
+    font-weight: 500;
+}
+
+.username button{
+    padding: 8px;
+    background-color: #5c50e3;
+    border: 1px solid #5c50e3;
+    color: #ffff;
+    border-radius: 4px;
+}
+
+.user-table{
+    margin-top: 40px;
+}
+
+.user-table table{
+    margin-top: 20px;
+}
+
+.user-table table{
+    border-collapse: collapse;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    width: 75%;
+}
+
+.user-table table tr:nth-of-type(even){
+    background-color: #f3f3f3;
+}
+
+.user-table table td, th{
+    padding: 12px 7px;
+}
+
+.user-table table thead{
+    background-color: #5c50e3;
+}
+
+.user-table table thead th{
+    color: #ffff;
+}
+
+.user-table table tr{
+    text-align: center;
+}
+/* END user-detail */
+
+
+/* bookdetail */
+.bookDetailLeftSide {
+    min-height: 220px;
+    background-color:#ffffffcc;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 40px;
+}
+
+.bookDetailIMG {
+    flex-direction: column;
+    width: 30%;
+}
+
+.bookDetailIMG img{
+    width: 100%;
+    height: 100%;
+}
+
+.bookDetailText{
+    width: 45%;
+    margin: 0 10px;
+}
+
+.bookDetailLeftSide button{
+    padding: 8px;
+    background-color: #5c50e3;
+    border: 1px solid #5c50e3;
+    color: #ffff;
+    border-radius: 4px;
+    margin: 4px 0;
+}
+
+.bookDetailText h3{
+    font-size: 30px;
+    font-weight: 500;
+    color: #1f2538;
+}
+
+.bookDetailLeftSide form span{
+    display: none;
+}
+
+.bookDetailLeftSide form textarea{
+    width: 100% !important;
+    margin: 10px 0;
+    border: 1px solid #5c50e3;
+    border-radius: 4px;
     padding: 8px;
 }
 
-#books tr:nth-child(even) {
-    background-color: #f2f2f2;
+.bookDetailLeftSide .comments{
+    
 }
 
-#books tr:hover {
-    background-color: #ddd;
+.bookDetailLeftSide .comments .comment{
+    border-bottom: 1px solid #5c50e3;
 }
 
-#books th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: left;
-    background-color: #4caf50;
-    color: white;
+.bookDetailLeftSide .comments .comment h3{
+    margin: 10px 0;
+}
+
+.bookDetailLeftSide .comments .comment h5{
+    margin: 10px 40px;
+}
+
+.bookDetailLeftSide .comments .comment .comment_text{
+    
 }

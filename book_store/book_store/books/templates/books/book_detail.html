@@ -1,10 +1,13 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-<div class="row">
-    <div class="col-md-4 bookDetailLeftSide">
-        <img class="bookImage" src="{{ book.image.url }}" alt=""> <br>
-        {% if book.actual_rating %}
+
+    <div class="bookDetailLeftSide dflex">
+        <div class="bookDetailIMG dflex">
+            <img class="bookImage" src="{{ book.image.url }}" alt="">
+            {% if book.book_amount > 0 %}
+        </div>
+        <!-- {% if book.actual_rating %}
         {% for rate in book.actual_rating %}
         <span class="fa fa-star checked"></span>
         {% endfor %}
@@ -13,74 +16,64 @@
         {% else %}
         <br>
         <h6>Nobody rated</h6>
-        {% endif %}
-        {% comment %} Give star:
+        {% endif %} -->
+
+        <!-- {% comment %} Give star:
         <a href="{% url 'rate_book' book.id rating=1 %}">1</a>
         <a href="{% url 'rate_book' book.id rating=2 %}">2</a>
         <a href="{% url 'rate_book' book.id rating=3 %}">3</a>
         <a href="{% url 'rate_book' book.id rating=4 %}">4</a>
-        <a href="{% url 'rate_book' book.id rating=5 %}">5</a> <br> {% endcomment %}
-        <a href="#commentBox">Num of comments ({{ book.comments.count }})</a>
-        {% if book.book_amount > 0 %}
-        <h5><strong>Available Book amount :</strong> {{ book.book_amount }}</h5>
-        {% if user.is_authenticated %}
-        <a href="{% url 'confirm_rent_view' book.id %}"><button class="btn btn-primary btn-xs">Rent</button></a>
-        <a href="{{ book.download_url }}"><button class="btn btn-primary btn-xs">Install</button></a>
-        <a href="{{ book.read_url }}"><button class="btn btn-primary btn-xs">Read Online</button></a
-        {% else %}
-        <a href="{% url 'confirm_rent_view' book.id %}"><button class="btn btn-primary btn-xs">Login to rent
-                book</button></a>
-        {% endif %}
-        {% else %}
-        <h5><strong>Available Book amount : </strong>none</h5>
-        {% endif %} <br>
-    </div>
-    <div class="col-md-8">
-        <h5><strong>{{ book.title }}</strong> </h5>
-        <h5><strong>Author:</strong> {{ book.author }}</h5>
-        <h5><strong>Category:</strong> {{ book.category }}</h5>
-        <h6><strong>Desciption:</strong> </h6>
-        <p> {{ book.description }}</p>
-        <hr class="my-4">
-        <div id="commentBox">
-            {% if user.is_authenticated %}
-            <form method="post" class="formsWidth">
-                {% csrf_token %}
-                {{ form|crispy }}
-                <button type="submit" class="btn btn-success">Add comment</button>
-            </form>
-            {% else %}
-            <a href="{% url 'login_to_comment_redirect' book.id %}"><button class="btn btn-primary btn-xs">Add
-                    comment (login)</button></a>
-            {% endif %}
+        <a href="{% url 'rate_book' book.id rating=5 %}">5</a> <br> 
+        {% endcomment %} -->
 
+        <div class="bookDetailText">
+            <h3>{{ book.title }} </h3>
+            <h5>Author: {{ book.author }}</h5>
+            <h5>Category: {{ book.category }}</h5>
+            <h5>Available Book amount: {{ book.book_amount }}</h5>
+            <h5>Desciption: </h5>
+            <p> {{ book.description }}</p>
+        </div>
+        <div style="width: 25%; margin: auto;">
+            {% if user.is_authenticated %}
+            <a href="{% url 'confirm_rent_view' book.id %}"><button class="btn btn-primary btn-xs">Rent</button></a>
+            <a href="{{ book.download_url }}"><button class="btn btn-primary btn-xs">Install</button></a>
+            <a href="{{ book.read_url }}"><button class="btn btn-primary btn-xs">Read Online</button></a>
+            {% else %}
+            <a href="{% url 'confirm_rent_view' book.id %}"><button class="btn btn-primary btn-xs">Login to rent
+                    book</button></a>
+            {% endif %}
+            {% else %}
+            <h5><strong>Available Book amount : </strong>none</h5>
+            {% endif %} <br>
+        </div>
+        
+    </div>
+
+    <div id="commentBox" class="bookDetailLeftSide">
+        {% if user.is_authenticated %}
+        <form method="post" class="formsWidth">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit" style="width:10%">Add comment</button>
+        </form>
+        {% else %}
+        <a href="{% url 'login_to_comment_redirect' book.id %}"><button style="width:20%;">Add comment (login)</button></a>
+        {% endif %}
+    </div>
+    <div class="bookDetailLeftSide">
+        <div class="comments">
             {% if comments %}
-            <br> <br>
             <h6>Comments({{ book.comments.count }}):</h6>
             {% for comment in comments %}
-            <div>
-                <h6><strong>{{ comment.user.username }}</strong></h6>
-                <h6 class="comment_text">{{ comment.text }}</h6>
+            <div class="comment">
+                <h3>User: {{ comment.user.username }}</strong></h6>
+                <h5 class="comment_text">comment: {{ comment.text }}</h4>
             </div>
-            <hr class="my-4">
             {% endfor %}
             {% else %}
             <h6>No comments yet</h6>
-
             {% endif %}
         </div>
     </div>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
 {% endblock content %}
