@@ -28,6 +28,7 @@ class Book(models.Model):
     description = models.TextField(max_length=1000, default="About book")
     image = models.ImageField(
         default='default_book.png', upload_to='books_pics')
+    file = models.FileField(default='default.png')
     read_url = models.URLField(max_length=200, default=0)
     download_url = models.URLField(max_length=200, default=0)
     author = models.CharField(max_length=100)
@@ -105,3 +106,7 @@ class InBoxMessages(models.Model):
 
     def __str__(self):
         return f'Message from {self.name}'
+
+class BookTest(models.Model):
+    file = models.FileField()
+    name = models.CharField(max_length=100)

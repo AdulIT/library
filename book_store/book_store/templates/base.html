@@ -37,11 +37,17 @@
                 </div>
                 <!-- Navbar Right Side -->
                 <div class="navbar-nav">
-
+                    {% if request.user.is_superuser %}
+                    <a class="nav-item nav-link" href="{% url 'messages' %}">Сообщение</a>
+                    <a class="nav-item nav-link" href="{% url 'create_book' %}">Добавить книгу</a>
+                    {% endif %}
                     {% if user.is_authenticated %}
                     <a class="nav-item nav-link" href="{% url 'UserProfile' %}">Мой профиль({{ user.username }})
                     </a>
                     <a class="nav-item nav-link" href="{% url 'logout' %}">Выйти</a>
+
+                    <a class="nav-item nav-link" href="{% url 'logout' %}"><img src="{% static 'icons/logout.png' %}"
+                            alt=""> Logout</a>
                     {% else %}
                     <a class="disabled nav-item nav-link" href=""><img src="{% static 'icons/help.png' %}" alt="">
                         Помощь</a>

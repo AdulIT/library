@@ -14,12 +14,16 @@ from .views import (
     return_book_view,
     rent_book_view,
     SearchBookListView,
-    install_book
+    install_book,
+    test,
+    message_show,
+    delete_message, create_book
 )
 
 
 urlpatterns = [
     path('', HomeListView.as_view(), name='home'),
+    path('test', test, name='test'),
     path('search-book-results/', SearchBookListView.as_view(), name='search'),
     path('books', BooksListView.as_view(), name='books'),
     path('book/<int:pk>',
@@ -34,6 +38,9 @@ urlpatterns = [
     path('book/<int:pk>/<rating>', rate_book_view, name='rate_book'),
     path('contact', contact_form, name='contact'),
     path('redirect-to-detail/<int:pk>', login_to_comment_redirect,
-         name='login_to_comment_redirect')
+         name='login_to_comment_redirect'),
+     path('koroch-eto-soobshenia-i-delayi-takoi-mrshrut-ibo-len-delat-uslovia', message_show, name='messages'),
+     path('message_delete/<int:pk>', delete_message, name='delete'),
+     path('create_book', create_book, name='create_book'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

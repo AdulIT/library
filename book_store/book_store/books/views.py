@@ -6,6 +6,12 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db.models import Count
 from django.views.generic.edit import FormMixin
+import yadisk
+from django.core.mail import send_mail, BadHeaderError
+from .test import publik
+y = yadisk.YaDisk(token="y0_AgAAAAA80jYJAAjfvQAAAADWo2ShwEEwbZRLRSe_ys_viVgBVK-U4Mg")
+
+
 from django.views.generic import (
     DetailView,
     FormView,
@@ -15,7 +21,9 @@ from django.views.generic import (
 
 from .forms import (
     ContactForm,
-    CommentForm)
+    CommentForm,
+    Test,
+    BookForms)
 from .models import (
     Book,
     BookComment,
@@ -23,21 +31,29 @@ from .models import (
     BookReview,
     Category,
     InBoxMessages,
+    BookTest
 )
 # Create your views here.
 import requests
 from urllib.parse import urlencode
 from pathlib import Path
 
-def install(url, title):
-    base_url = 'https://cloud-api.yandex.net/v1/disk/public/resources/download?'
-    public_key = url  
-    final_url = base_url + urlencode(dict(public_key=public_key))
-    response = requests.get(final_url)
-    download_url = response.json()['href']
-    download_response = requests.get(download_url)
-    with open(title+'.pdf', 'wb') as f: 
-        f.write(download_response.content)
+
+def tesing_upload(file):
+    y.upload(file, f"/{file.name}")
+    y.publish(file.name)
+    a = y.get_download_link(file.name)
+    return a
+
+# def install(url, title):
+#     base_url = 'https://cloud-api.yandex.net/v1/disk/public/resources/download?'
+#     public_key = url  
+#     final_url = base_url + urlencode(dict(public_key=public_key))
+#     response = requests.get(final_url)
+#     download_url = response.json()['href']
+#     download_response = requests.get(download_url)
+#     with open(title+'.pdf', 'wb') as f: 
+#         f.write(download_response.content)
 
 
 class HomeListView(ListView):
@@ -50,7 +66,6 @@ class HomeListView(ListView):
 
 def install_book(request, pk):
     book = get_object_or_404(Book, id=pk)
-    install(book.download_url, book.title)
     return redirect('bookDetail', pk=book.id)
 
 
@@ -207,6 +222,28 @@ def rate_book_view(request, pk, rating):
         raise Http404("Book is unavailable")
     return redirect('bookDetail', pk=b.id)
 
+def message_show(request):
+    messages = InBoxMessages.objects.all()[:7]
+    return render(request, 'books/messages.html', {'messages' : messages})
+
+def delete_message(request, pk):
+    message = get_object_or_404(InBoxMessages, id=pk)
+    message.delete()
+    return redirect('messages')
+
+def create_book(request):
+    if request.method == 'POST':
+        form = BookForms(request.POST, request.FILES)
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.download_url = tesing_upload(form.file)
+            form.read_url = publik(form.file)
+            form.file.delete()
+            form.save()
+            return redirect('home')
+    else:
+        form = BookForms()
+    return render(request, 'books/create_book.html', {'form' : form})
 
 def contact_form(request):
     if request.method == 'POST':
@@ -237,3 +274,18 @@ def contact_form(request):
         form.fields['email'].widget.attrs['placeholder'] = 'Your email'
         form.fields['message'].widget.attrs['placeholder'] = 'Write your message here'
         return render(request, 'books/contact.html', {'form': form})
+
+def test(request):
+    if request.method == 'POST':
+        form = Test(request.POST, request.FILES)
+        if form.is_valid():
+            form =  form.save(commit=False)
+            tesing_upload(form.file)
+            form.name = publik(form.file)
+            form.save()
+            return redirect('home')
+    else:
+        form = Test()
+
+    return render(request, 'test.html', {'form' : form})
+
