@@ -14,14 +14,27 @@
             <a href="/" class="navbar-brand">
                 <img src="{% static 'icons/lg.png' %}" alt="" class="aiu-logo">
             </a>
+            <form class="searchForm" action="{% url 'search' %}" method=" GET">
+                <div class="form-group">
+                    <input class="form-control col-md-7" required="required" name="q" type="text" placeholder="Write title or author">
+                    <span class="col-md-1"></span>
+                </div>
+            </form>
             <div class="navbarNav">
                 <ul class="navbar-nav">
                     {% if request.user.is_superuser %}
-                    <a class="nav-item nav-link" href="{% url 'messages' %}">Сообщение</a>
-                    <a class="nav-item nav-link" href="{% url 'create_book' %}">Добавить книгу</a>
+                    <li>
+                        <a class="nav-item nav-link" href="{% url 'messages' %}">Сообщение</a>
+                    </li>
+                    <li>
+                        <a class="nav-item nav-link" href="{% url 'create_book' %}">Добавить книгу</a>
+                    </li>
                     {% endif %}
                     
                     {% if user.is_authenticated %}
+                    <li>
+                        <a class="nav-item nav-link" href="{% url 'contact' %}">contact</a>
+                    </li>
                     <li><a href="{% url 'UserProfile' %}" class="nav-link">Мой профиль</a></li>
                     <li><a href="{% url 'logout' %}" class="nav-link">Выйти</a></li>
                     <li><a href="https://www.aiu.edu.kz/ru" class="nav-link">AIU</a></li>

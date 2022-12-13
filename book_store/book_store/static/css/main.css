@@ -80,6 +80,13 @@ body {
     color:rgb(92, 80, 227);
 }
 
+.searchForm{
+width: 30%;
+}
+.searchForm input{
+    width: 100%;
+    padding: 8px;
+}
 /* END header */
 
 
@@ -124,7 +131,8 @@ body {
 }
 
 .cardBorder .text{
-    padding: 1rem
+    padding: 1rem;
+    word-wrap: break-word;
 }
 
 .cardBorder .text h3,h5{
@@ -353,4 +361,64 @@ body {
 
 .bookDetailLeftSide .comments .comment .comment_text{
     
+}
+
+/* END bookdetail */
+
+/* createbook */
+.createbook p{
+    margin: 5px 0;
+}
+.createbook p label,input{
+    margin: 5px 0;
+}
+.createbook p textarea,input{
+    border-radius: 4px;
+    border: 1px solid #5c50e3;
+}
+.createbook p textarea{
+    width: 100% !important;
+}
+.createbook #id_image,#id_file{
+    border:none;
+}
+.createbook .btn{
+    width: 100%;
+    padding: 8px;
+    background-color: #ffff;
+    border: 1px solid #5c50e3;
+    color: #5c50e3;
+    border-radius: 4px;
+    margin: 4px 0;
+    transition: 0.2s;
+}
+.createbook .btn:hover{
+    background-color: #5c50e3;
+    color: #ffff;
+}
+/* END createbook */
+
+/* contact */
+#div_id_name input{
+    border-radius: 4px;
+    border: 1px solid #5c50e3;
+}
+#div_id_email input{
+    border-radius: 4px;
+    border: 1px solid #5c50e3;
+}
+#div_id_message textarea{
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 4px;
+    border: 1px solid #5c50e3;
+}
+/* END contact */
+
+/* messages */
+.messages .bg{
+    background-color: #ffff;
+    min-height: 100px;
+    padding: 20px;
+    border-radius: 8px;
 }

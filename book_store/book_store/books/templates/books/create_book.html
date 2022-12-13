@@ -1,8 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>New post</h1>
-<form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
-  {{ form.as_p }}
-  <input type="submit" value="Save" />
-</form>
+<div class="login-center">
+  <div class="bg">
+    <h1>New post</h1>
+    <form action="" method="post" enctype="multipart/form-data" class="createbook">{% csrf_token %}
+      {{ form.as_p }}
+      <input class="btn" type="submit" value="Save" />
+    </form>
+  </div>
+</div>
+
 {% endblock %}
